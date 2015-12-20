@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>d3-basketball-rebound-chart</title>
+    <link rel="stylesheet" type="text/css" href="../d3.basketball-shot-chart.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://rawgit.com/mbostock/d3/master/d3.js"></script>
+    <script src="http://rawgit.com/virajsanghvi/d3-plugins/master/hexbin/hexbin.js"></script>
+    <script src="http://rawgit.com/misoproject/d3.chart/master/d3.chart.js"></script>
+    <script src="http://rawgit.com/virajsanghvi/d3.chart.defaults/master/d3.chart.defaults.js"></script>
+    <script src="../d3.basketball-shot-chart.js"></script>
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <link href="../bootstrap/css/bootstrap.css" rel="stylesheet" media="screen">
+    <script src="../bootstrap/css/application.css"></script>
+    <style>
+        svg { font-family: Arial, sans-serif; }
+    </style>
+  </head>
+  <body>
+
+  <div class="container">
+    <div class="span6 top_logo">
+        Benjamin Stewart <strong>12/18/15</strong>
+        <!-- <img src="http://placehold.it/177x60"> -->
+    </div>
+      <div class="hero-unit text-center">
+        <h1>How The Best Rebounder In The NBA Could Be Even Better!</h1>
+          <h3><a href="../views/index.html">Home</a></h3>
+          <h3><a href="../views/case_one.html">Action Point 1</a></h3>
+          <h3><a href="../views/case_two.html">Action Point 2</a></h3>
+      </div>
+  </div>
+
+<!--Case 1: Actively Boxing Out -->
+<div class="container">
+  <h2>First Action Point: Actively Boxing Out</h2>
+  <h4>
+    <i>"a<b>k</b>-tiv-<b>lee</b> <b>bok</b>-sing out"</i>: The ability of a player to be in proper position to gather a rebound.
+    This includes having their hands above their waist, their arms away from their sides, and to use their body as a tool
+    to block out any defender during a contested rebound attempt
+  </h4>
+
+  <div class="row">
+    <div class="span12 text-center">
+      <div id="chart"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="span12 text-center">
+    </div>
+  </div>
+  <div class="row">
+    <div class="span6 text-center">
+      <!-- Good Position  -->
+      <img src="../assets/second_spectrum_view.png" alt="Gameplay Screenshot">
+    </div>
+    <div class="span6 text-center">
+      <!-- Poor Position -->
+      <img src="../assets/second_spectrum_view.png" alt="Gameplay Screenshot">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="analysis">
+      <h2>Analysis</h2>
+      <p>
+        The above shot chart is displaying missed field goal attempts from the Detroit Pistons vs. Los Angeles Clippers game
+        on Dec 14, 2015 (excluding overtime). Shots less than eight feet from the basket have been filtered out because we wanted to ensure that
+        a potential rebounder would have time to get into position for a rebound. Also, the chart is excluding any alley oops, layups, or post-ups because
+        rebounding these events rely more on a quick second jump then boxing out and practicing rebounding fundamentals.
+        Lastly, shots taken while Andre Drummond was out of the game, have been excluded from the chart.
+      </p>
+      <p>
+        The efficiency metric is based on a custom "z" scale that is responsible for assigning a color to each hexagon from red to green. This scale
+        is based on two main factors. The first factor is checking to see if a rebounder is in a proper stance. This means that their arms are not touching their sides
+        and their hands are above their waist. This will ensure that they are prepared for a rebound. The second metric focuses on the players
+        ability to actually use their body to box out defenders. This is very important during contested rebounds and can greatly impact overall numbers.
+      </p>
+      <p>
+        If a player has the proper stance with correct arm/hand placement and they are making an effort to box out, they will be given a z-score of +2 as seen
+        in figure #$$#$. If a player doesn't have the proper stance and they don't make an effort, they will be assigned a z-score of -2 as seen in figure
+        BLAHHH. The range in between will depend on defense and meeting one or both criteria.
+      </p>
+      <p>
+        From this chart we can see that even though he doesn't box out, he is still incredible at gathering rebounds..
+        We realize this is only a one game sample but
+      </p>
+      <h4>Good rebounder with bad tendencies vs. bad rebounder with good tendencies</h4>
+      <p>
+        It is intersting to add another dimension to rebounding. What does this really mean....
+      </p>
+  </div>
+</div>
+
+<div class="container">
+    <h2>Code</h2>
+    <p>
+      Below is a sample of code used to generate the above visualization
+    </p>
+        <!-- breaking indentation for display -->
+    <pre id="code">
+      d3.select(document.getElementById('chart'))
+          .append("svg")
+            .chart("BasketballShotChart", {
+              width: 800,
+              title: 'Missed Defensive Field Goals',
+              hexagonFillValue: function(d) {  return d.z; },
+              // reverse the heat range to map our z values to other colors
+              heatScale: d3.scale.quantile()
+                .domain([-2.5, 2.5])
+                <!--Medium Color #FADC97',   -->
+                .range(['#B02B48', '#F08460', '#ace1af', '#03c03c']),
+              hexagonBin: function (point, bin) {
+                var currentZ = bin.z || 0;
+                var totalAttempts = bin.attempts || 0;
+                var totalZ = currentZ * totalAttempts;
+
+                var attempts = point.attempts || 1;
+                bin.attempts = totalAttempts + attempts;
+                bin.z = (totalZ + (point.z * attempts))/bin.attempts;
+              },
+              // update radius threshold to at least 4 shots to clean up the chart
+              hexagonRadiusThreshold: 4,
+            })
+              .draw(data);
+    </pre>
+      <!-- end -->
+</div>
+    <script>
+    // If he got the rebound or not
+        var data =  [{"x":3,"y":18,"made":2,"attempts":2,"z":-2},{"x":4,"y":18,"made":2,"attempts":2,"z":-2}, {"x":9,"y":25,"made":2,"attempts":2,"z":-2}, {"x":9,"y":27,"made":2,"attempts":2,"z":-2}, {"x":14,"y":28,"made":2,"attempts":2,"z":-2},
+        {"x":15,"y":29,"made":2,"attempts":2,"z":-2}, {"x":17,"y":29,"made":2,"attempts":2,"z":-2}, {"x":17,"y":30,"made":2,"attempts":2,"z":-2}, {"x":43,"y":23,"made":2,"attempts":2,"z":-2}, {"x":48,"y":7,"made":2,"attempts":2,"z":-2},
+        {"x":49,"y":5,"made":2,"attempts":2,"z":-2}, {"x":9,"y":8,"made":2,"attempts":2,"z":-2}, {"x":15,"y":8,"made":2,"attempts":2,"z":-2}, {"x":17,"y":10,"made":2,"attempts":2,"z":-2}, {"x":8,"y":12,"made":2,"attempts":2,"z":-2}, {"x":9,"y":15,"made":2,"attempts":2,"z":-2}, {"x":10,"y":16,"made":2,"attempts":2,"z":-2},
+        {"x":18,"y":21,"made":2,"attempts":2,"z":-2}, {"x":19,"y":20,"made":2,"attempts":2,"z":-2}, {"x":25,"y":19,"made":2,"attempts":2,"z":-2}, {"x":25,"y":18,"made":2,"attempts":2,"z":-2},
+        {"x":34,"y":21,"made":2,"attempts":2,"z":-2}, {"x":33,"y":23,"made":2,"attempts":2,"z":-2}, {"x":40,"y":22,"made":2,"attempts":2,"z":-2}, {"x":42,"y":19,"made":2,"attempts":2,"z":-2}, {"x":34,"y":18,"made":2,"attempts":2,"z":-2}, {"x":38,"y":13,"made":2,"attempts":2,"z":-2},
+        {"x":42,"y":16,"made":2,"attempts":2,"z":-2}, {"x":42,"y":14,"made":2,"attempts":2,"z":-2}, {"x":44,"y":14,"made":2,"attempts":2,"z":-2}, {"x":42,"y":8,"made":2,"attempts":2,"z":-2}]
+        eval(document.getElementById('code').innerHTML);
+    </script>
+  </body>
+</html>

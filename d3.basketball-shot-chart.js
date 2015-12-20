@@ -1,11 +1,4 @@
-/**
- * Create and configure NBA shot charts for offense and defense.
- *
- * Requires:
- *   - d3
- *   - d3.chart
- *   - d3.chart.defaults
- */
+
 (function () {
 
   var clipCounter = 0;
@@ -17,20 +10,16 @@
 
       var base = this.base
         .attr('class', 'shot-chart');
-
       // draw base court
       this.drawCourt();
-
       // add title
       this.drawTitle();
-
       // draw legend
       this.drawLegend();
-
       // add data
       this.drawShots();
     },
-     
+
     // helper to create an arc path
     appendArcPath: function (base, radius, startAngle, endAngle) {
       var points = 30;
@@ -55,14 +44,14 @@
           visibleCourtLength = this._visibleCourtLength,
           keyWidth = this._keyWidth
           threePointRadius = this._threePointRadius,
-          threePointSideRadius = this._threePointSideRadius, 
+          threePointSideRadius = this._threePointSideRadius,
           threePointCutoffLength = this._threePointCutoffLength,
           freeThrowLineLength = this._freeThrowLineLength,
           freeThrowCircleRadius = this._freeThrowCircleRadius,
           basketProtrusionLength = this._basketProtrusionLength,
           basketDiameter = this._basketDiameter,
           basketWidth = this._basketWidth,
-          restrictedCircleRadius = this._restrictedCircleRadius,   
+          restrictedCircleRadius = this._restrictedCircleRadius,
           keyMarkWidth = this._keyMarkWidth;
 
       var base = this.base
@@ -71,7 +60,7 @@
         .append('g')
           .attr('class', 'shot-chart-court');
       if (this._height) base.attr('height', this._height);
-                       
+
       base.append("rect")
         .attr('class', 'shot-chart-court-key')
         .attr("x", (courtWidth / 2 - keyWidth / 2))
@@ -85,15 +74,15 @@
         .attr("y1", visibleCourtLength)
         .attr("x2", courtWidth)
         .attr("y2", visibleCourtLength);
-              
-      var tpAngle = Math.atan(threePointSideRadius / 
+
+      var tpAngle = Math.atan(threePointSideRadius /
         (threePointCutoffLength - basketProtrusionLength - basketDiameter/2));
       this.appendArcPath(base, threePointRadius, -1 * tpAngle, tpAngle)
         .attr('class', 'shot-chart-court-3pt-line')
-        .attr("transform", "translate(" + (courtWidth / 2) + ", " + 
-          (visibleCourtLength - basketProtrusionLength - basketDiameter / 2) + 
+        .attr("transform", "translate(" + (courtWidth / 2) + ", " +
+          (visibleCourtLength - basketProtrusionLength - basketDiameter / 2) +
           ")");
-         
+
       [1, -1].forEach(function (n) {
         base.append("line")
           .attr('class', 'shot-chart-court-3pt-line')
@@ -102,20 +91,20 @@
           .attr("x2", courtWidth / 2 + threePointSideRadius * n)
           .attr("y2", visibleCourtLength);
       });
-        
+
       this.appendArcPath(base, restrictedCircleRadius, -1 * Math.PI/2, Math.PI/2)
         .attr('class', 'shot-chart-court-restricted-area')
-        .attr("transform", "translate(" + (courtWidth / 2) + ", " + 
+        .attr("transform", "translate(" + (courtWidth / 2) + ", " +
           (visibleCourtLength - basketProtrusionLength - basketDiameter / 2) + ")");
-                                                         
+
       this.appendArcPath(base, freeThrowCircleRadius, -1 * Math.PI/2, Math.PI/2)
         .attr('class', 'shot-chart-court-ft-circle-top')
-        .attr("transform", "translate(" + (courtWidth / 2) + ", " + 
+        .attr("transform", "translate(" + (courtWidth / 2) + ", " +
           (visibleCourtLength - freeThrowLineLength) + ")");
-                                                          
+
       this.appendArcPath(base, freeThrowCircleRadius, Math.PI/2, 1.5 * Math.PI)
         .attr('class', 'shot-chart-court-ft-circle-bottom')
-        .attr("transform", "translate(" + (courtWidth / 2) + ", " + 
+        .attr("transform", "translate(" + (courtWidth / 2) + ", " +
           (visibleCourtLength - freeThrowLineLength) + ")");
 
       [7, 8, 11, 14].forEach(function (mark) {
@@ -127,7 +116,7 @@
             .attr("x2", courtWidth / 2 + keyWidth / 2 * n)
             .attr("y2", visibleCourtLength - mark)
         });
-      });    
+      });
 
       base.append("line")
         .attr('class', 'shot-chart-court-backboard')
@@ -135,7 +124,7 @@
         .attr("y1", visibleCourtLength - basketProtrusionLength)
         .attr("x2", courtWidth / 2 + basketWidth / 2)
         .attr("y2", visibleCourtLength - basketProtrusionLength)
-                                     
+
       base.append("circle")
         .attr('class', 'shot-chart-court-hoop')
         .attr("cx", courtWidth / 2)
@@ -147,9 +136,9 @@
     drawTitle: function () {
       this.base.append("text")
         .classed('shot-chart-title', true)
-        .attr("x", (this._courtWidth / 2))             
+        .attr("x", (this._courtWidth / 2))
         .attr("y", (this._courtLength / 2 - this._visibleCourtLength) / 3)
-        .attr("text-anchor", "middle")  
+        .attr("text-anchor", "middle")
         .text(this._title);
     },
 
@@ -165,10 +154,10 @@
 
       var heatRange = heatScale.range();
       var largestHexagonRadius = hexagonRadiusSizes[hexagonRadiusSizes.length - 1];
-      var colorXMid = courtWidth - 
-        (threePointSideRadius - keyWidth / 2) / 2 - 
+      var colorXMid = courtWidth -
+        (threePointSideRadius - keyWidth / 2) / 2 -
         (courtWidth / 2 - threePointSideRadius);
-      var colorXStart = colorXMid - (heatRange.length * largestHexagonRadius); 
+      var colorXStart = colorXMid - (heatRange.length * largestHexagonRadius);
       var colorYStart = visibleCourtLength - basketProtrusionLength/3;
       var hexbin = d3.hexbin();
       var hexagon = hexbin.hexagon(largestHexagonRadius);
@@ -176,38 +165,38 @@
         .classed('legend', true);
       colorLegend.append("text")
         .classed('legend-title', true)
-        .attr("x", colorXMid)             
+        .attr("x", colorXMid)
         .attr("y", colorYStart - largestHexagonRadius * 2)
-        .attr("text-anchor", "middle")  
+        .attr("text-anchor", "middle")
         .text(this._colorLegendTitle);
       colorLegend.append("text")
-        .attr("x", colorXStart)             
+        .attr("x", colorXStart)
         .attr("y", colorYStart)
-        .attr("text-anchor", "end")  
-        .text(this._colorLegendStartLabel); 
+        .attr("text-anchor", "end")
+        .text(this._colorLegendStartLabel);
       colorLegend.append("text")
-        .attr("x", colorXStart + heatRange.length * 2 * largestHexagonRadius)             
+        .attr("x", colorXStart + heatRange.length * 2 * largestHexagonRadius)
         .attr("y", colorYStart)
-        .attr("text-anchor", "start")  
-        .text(this._colorLegendEndLabel);  
+        .attr("text-anchor", "start")
+        .text(this._colorLegendEndLabel);
       colorLegend.selectAll('path').data(heatRange)
         .enter()
           .append('path')
             .attr('d', hexagon)
             .attr("transform", function (d, i) {
-              return "translate(" + 
-                (colorXStart + ((1 + i*2) *largestHexagonRadius)) + ", " + 
+              return "translate(" +
+                (colorXStart + ((1 + i*2) *largestHexagonRadius)) + ", " +
                 (colorYStart) + ")";
             })
             .style('fill', function (d, i) { return d; });
 
-      
+
       var sizeRange = hexagonRadiusSizes.slice(-3);
       var sizeLengendWidth = 0;
       for (var i = 0, l = sizeRange.length; i < l; ++i) {
         sizeLengendWidth += sizeRange[i] * 2;
       }
-      var sizeXMid = (threePointSideRadius - keyWidth / 2) / 2 + 
+      var sizeXMid = (threePointSideRadius - keyWidth / 2) / 2 +
         (courtWidth / 2 - threePointSideRadius);
       var sizeXStart = sizeXMid - (sizeLengendWidth / 2);
       var sizeYStart = visibleCourtLength - basketProtrusionLength/3;
@@ -215,14 +204,14 @@
         .classed('legend', true);
       sizeLegend.append("text")
         .classed('legend-title', true)
-        .attr("x", sizeXMid)             
+        .attr("x", sizeXMid)
         .attr("y", sizeYStart - largestHexagonRadius * 2)
-        .attr("text-anchor", "middle")  
+        .attr("text-anchor", "middle")
         .text(this._sizeLegendTitle);
       sizeLegend.append("text")
-        .attr("x", sizeXStart)             
+        .attr("x", sizeXStart)
         .attr("y", sizeYStart)
-        .attr("text-anchor", "end")  
+        .attr("text-anchor", "end")
         .text(this._sizeLegendSmallLabel);
       sizeLegend.selectAll('path').data(sizeRange)
         .enter()
@@ -230,16 +219,16 @@
             .attr('d', function (d) { return hexbin.hexagon(d); })
             .attr("transform", function (d, i) {
               sizeXStart += d * 2;
-              return "translate(" + 
-                (sizeXStart - d) + ", " + 
+              return "translate(" +
+                (sizeXStart - d) + ", " +
                 sizeYStart + ")";
             })
             .style('fill', '#999');
       sizeLegend.append("text")
         .attr("x", sizeXStart)
         .attr("y", sizeYStart)
-        .attr("text-anchor", "start")  
-        .text(this._sizeLegendLargeLabel); 
+        .attr("text-anchor", "start")
+        .text(this._sizeLegendLargeLabel);
     },
 
     // draw hexagons on court
@@ -255,7 +244,7 @@
           hexagonFillValue = this._hexagonFillValue,
           radiusScale;
 
-      // bin all shots into hexagons 
+      // bin all shots into hexagons
       var hexbin = d3.hexbin()
         .size([courtWidth, visibleCourtLength])
         .radius(hexagonRadius)
@@ -265,17 +254,17 @@
 
       // create layerBase
       var layerBase = this.base.append('g');
-           
+
       // append clip to prevent showing data outside range
       clipCounter += 1;
-      var clipId = 'bbs-clip-' + clipCounter; 
+      var clipId = 'bbs-clip-' + clipCounter;
       layerBase.append('clipPath')
         .attr('id', clipId)
         .append("rect")
           .attr("class", "shot-chart-mesh")
           .attr("width", courtWidth)
           .attr("height", visibleCourtLength);
-           
+
       // add layer
       this.layer('hexagons', layerBase, {
 
@@ -313,19 +302,19 @@
         events: {
 
           enter: function () {
-            this.attr('transform', function(d) { 
-              return "translate(" + d.x + "," + d.y + ")"; 
+            this.attr('transform', function(d) {
+              return "translate(" + d.x + "," + d.y + ")";
             });
           },
 
           merge: function () {
             this
-              .attr('d', function(d) { 
+              .attr('d', function(d) {
                 var val = radiusScale(hexagonRadiusValue(d))
-                if (val > 0) return hexbin.hexagon(val); 
+                if (val > 0) return hexbin.hexagon(val);
               })
-              .style('fill', function(d) { 
-                return heatScale(hexagonFillValue(d)); 
+              .style('fill', function(d) {
+                return heatScale(hexagonFillValue(d));
               });
           },
 
@@ -336,7 +325,7 @@
         },
 
       });
-           
+
     },
 
     // redraw chart
@@ -347,12 +336,12 @@
     // on court length change, recalculate length of visible court
     calculateVisibleCourtLength: function () {
       var halfCourtLength = this._courtLength / 2;
-      var threePointLength = this._threePointRadius + 
+      var threePointLength = this._threePointRadius +
         this._basketProtrusionLength;
-      this._visibleCourtLength = threePointLength + 
+      this._visibleCourtLength = threePointLength +
         (halfCourtLength - threePointLength) / 2;
     },
- 
+
   });
 
   d3.chart.initializeDefaults(BasketballShotChart, {
@@ -418,7 +407,7 @@
     // distance of three point line from basket (ft)
     threePointRadius: 23.75,
     // distance of corner three point line from basket (ft)
-    threePointSideRadius: 22, 
+    threePointSideRadius: 22,
     // title of chart
     title: 'Shot chart',
     // method to determine x position of a bin on the court
