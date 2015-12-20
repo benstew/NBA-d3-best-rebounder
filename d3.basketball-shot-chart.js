@@ -200,35 +200,35 @@
         (courtWidth / 2 - threePointSideRadius);
       var sizeXStart = sizeXMid - (sizeLengendWidth / 2);
       var sizeYStart = visibleCourtLength - basketProtrusionLength/3;
-      var sizeLegend = this.base.append('g')
-        .classed('legend', true);
-      sizeLegend.append("text")
-        .classed('legend-title', true)
-        .attr("x", sizeXMid)
-        .attr("y", sizeYStart - largestHexagonRadius * 2)
-        .attr("text-anchor", "middle")
-        .text(this._sizeLegendTitle);
-      sizeLegend.append("text")
-        .attr("x", sizeXStart)
-        .attr("y", sizeYStart)
-        .attr("text-anchor", "end")
-        .text(this._sizeLegendSmallLabel);
-      sizeLegend.selectAll('path').data(sizeRange)
-        .enter()
-          .append('path')
-            .attr('d', function (d) { return hexbin.hexagon(d); })
-            .attr("transform", function (d, i) {
-              sizeXStart += d * 2;
-              return "translate(" +
-                (sizeXStart - d) + ", " +
-                sizeYStart + ")";
-            })
-            .style('fill', '#999');
-      sizeLegend.append("text")
-        .attr("x", sizeXStart)
-        .attr("y", sizeYStart)
-        .attr("text-anchor", "start")
-        .text(this._sizeLegendLargeLabel);
+      // var sizeLegend = this.base.append('g')
+      //   .classed('legend', true);
+      // sizeLegend.append("text")
+      //   .classed('legend-title', true)
+      //   .attr("x", sizeXMid)
+      //   // .attr("y", sizeYStart - largestHexagonRadius * 2)
+      //   .attr("text-anchor", "middle")
+      //   .text(this._sizeLegendTitle);
+      // sizeLegend.append("text")
+      //   .attr("x", sizeXStart)
+      //   .attr("y", sizeYStart)
+      //   .attr("text-anchor", "end")
+      //   .text(this._sizeLegendSmallLabel);
+      // sizeLegend.selectAll('path').data(sizeRange)
+      //   .enter()
+      //     .append('path')
+      //       .attr('d', function (d) { return hexbin.hexagon(d); })
+      //       .attr("transform", function (d, i) {
+      //         sizeXStart += d * 2;
+      //         return "translate(" +
+      //           (sizeXStart - d) + ", " +
+      //           sizeYStart + ")";
+      //       })
+      //       .style('fill', '#999');
+      // sizeLegend.append("text")
+      //   .attr("x", sizeXStart)
+      //   .attr("y", sizeYStart)
+      //   .attr("text-anchor", "start")
+      //   .text(this._sizeLegendLargeLabel);
     },
 
     // draw hexagons on court
@@ -397,11 +397,11 @@
     // radius of restricted circle (ft)
     restrictedCircleRadius: 4,
     // title of hexagon size legend
-    sizeLegendTitle: 'Frequency',
+    // sizeLegendTitle: 'Frequency',
     // label of start of hexagon size legend
-    sizeLegendSmallLabel: 'low',
+    // sizeLegendSmallLabel: 'low',
     // label of end of hexagon size legend
-    sizeLegendLargeLabel: 'high',
+    // sizeLegendLargeLabel: 'high',
     // distance from baseline where three point line because circular (ft)
     threePointCutoffLength: 14,
     // distance of three point line from basket (ft)
