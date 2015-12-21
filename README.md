@@ -1,4 +1,4 @@
-# d3.basketball-shot-chart
+# The Best Rebounder Visualized
 
 This visualization aims to become a generic means of generating charts on a basketball court. Currently it only supports hexbin shot charts, with lots of flexibility, but is alpha quality and will be refactored to support other binning mechanisms and other mark types on top of a basketball court.
 
@@ -13,21 +13,15 @@ Currently customizable:
 ## Setup
 
 - Include ```d3.js```
-- Include ```hexbin.js``` [d3.hexbin](https://github.com/virajsanghvi/d3-plugins/tree/master/hexbin) - NOTE: this is a fork
-- Include ```d3.chart.js``` - [d3.chart](http://misoproject.com/d3-chart/)
-- Include ```d3.chart.defaults.js``` [d3.chart.defaults](https://github.com/virajsanghvi/d3.chart.defaults)
+- Include ```hexbin.js```  - NOTE: this is a fork
+- Include ```d3.chart.js``` -
+- Include ```d3.chart.defaults.js```
 - Include ```d3.basketball-shot-chart.js```
 - Include ```d3.basketball-shot-chart.css``` (or include the sass file)
 
-## Examples
-
-This library is currently used to generate the shot charts at [tothemean](http://tothemean.com/tools/shot-charts), and there's a [blog post that walks through using this chart](FIXME).
-
-If you clone the repo, you'll also find a simple example in the ```example``` directory.
-
 ## To use:
 
-Generally, you likely have some shot chart data that's an array of data points representing shots, including the x, y position on the court, and whether the shot was made: 
+Generally, you likely have some shot chart data that's an array of data points representing shots, including the x, y position on the court, and whether the shot was made:
 
 ```
   var data = [{"x":2,"y":9,"made":1},{"x":2,"y":8,"made":1},...];
@@ -47,7 +41,7 @@ Once we have our data, we can quickly chart it:
   var chart = d3.select(el)
     .append("svg")
     .chart("BasketballShotChart")
-      .draw(data); 
+      .draw(data);
 ```
 
 By default, the shot chart visualization recognizes the data structure above, but that can easily be configured with the options below. Also, by default, the heat chart is based on a range of shooting 0% to 100%. Most shot charts you've probably seen compare to the average, and its up to you to calculate that, but you can use the options below to update the range of values for the heatMap, and to make the hexagon colors or radiuses based on any value from your data you want.
@@ -58,7 +52,7 @@ You can pass any of these options when creating a new chart. You can change them
 
 These are all defined in the code, and I recommend looking there for more information on how they're actually utilized.
 
-- basketDiameter: basketball hoop diameter (ft) (default: 1.5) 
+- basketDiameter: basketball hoop diameter (ft) (default: 1.5)
 - basketProtrusionLength: distance from baseline to backboard (ft) (default: 4)
 - basketWidth: backboard width (ft) (default: 6)
 - colorLegendTitle: title of hexagon color legend (default: 'Efficiency')
@@ -70,7 +64,7 @@ These are all defined in the code, and I recommend looking there for more inform
 - freeThrowCircleRadius: radius of free throw line circle (ft) (default: 6)
 - heatScale: d3 scale for hexagon colors (default: d3 quantize scale if [0, 1] domain and colors from Goldsberry's shot charts)
 - height: height of svg, specifying won't change scale of chart (default: undefined)
-- hexagonBin: method of aggregating points into a bin (e.g. function (point, bin) {...}) (default: bins by aggregating makes and attempts from points) 
+- hexagonBin: method of aggregating points into a bin (e.g. function (point, bin) {...}) (default: bins by aggregating makes and attempts from points)
 - hexagonBinVisibleThreshold: how many points does a bin need to be visualized (default: 1)
 - hexagonFillValue: method to determine value to be used with specified heatScale (e.g. function (bin) {...}) (default: returns bin.made/bin.attempts)
 - hexagonRadius: bin size with regards to courth width/height (ft) (default: .75)
