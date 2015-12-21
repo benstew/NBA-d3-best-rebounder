@@ -44,25 +44,26 @@
       <div class="Introduction">
         <h2>Background</h2>
         <p>
-          Andre Drummond is off to a tremendous start this season. He is currently leading the NBA in rebounds with
-          16.36 rebounds per game. This is the highest per game rebounding average since Dennis Rodmans' epic performances
-          in the mid 1990s. What we are witnessing now is a record worthy feat.
+          Andre Drummond is off to a tremendous start this season.
+          He is currently leading the NBA in rebounds with 16.36 rebounds per game.
+          This is the highest per game rebounding average since the epic performances of Dennis Rodman
+          in the mid 1990s. We are witnessing now is a record worthy feat.
         </p>
         <p>
-          But the incredible part is that he could get even better! Andre's innate ability to sniff out rebounds is unmatched
-          in the NBA but he is still only 22 years old which means he is still learning the game. Each year that he has played in
-          the NBA, he has increased his RPG numbers significantly. During his first year in the league from 2012-2013, he averaged
-          7.6 rebounds a game. Then in the 2014-2015 season, he averaged 13.5 rebounds. This shows consistent year after year improvement as
-          he continues to learn the game.
+          The incredible part is that he could get even better! Andre's innate ability to sniff out
+          rebounds is unmatched in the NBA but at only 22 years old he is still learning the game.
+          Each year he has played in the NBA, his RPG numbers have increased significantly. During
+          his first year in the league, from 2012-2013, he averaged 7.6 rebounds a game.
+          In the 2014-2015 season, he averaged 13.5 rebounds. Consistent improvement is evident year over year.
         </p>
         <p>
-          From the looks of it, he could be on track to momentous numbers and I was curious to see if there was anything else that he could do that
-          would have an immediate impact on his total rebounding statistics.  Through explicit use of the NBA API and some advanced statistics
-          reporting available on NBA.com, I have created a two point action plan that Andre Drummond can utiliize to increase his total number of
-          rebounds per game.
+          From the looks of it, he could be on track to momentous numbers. I was curious to see if there
+          was anything else that he could do that would have an immediate impact on his total rebounding statistics.
+          Through explicit use of the NBA API and advanced statistical reporting available on NBA.com,
+          I have created a two point action plan that Andre Drummond can utilize to increase his total number of rebounds per game.
         </p>
         <p>
-          *Stats taken as of 12/18.
+          *Stats taken as of 12/19/2015.
         </p>
       </div>
     </div>
@@ -72,26 +73,29 @@
           <h2>The Action Plan</h2>
           <p>
             <strong>
-              If Andre Drummond improves his ability to actively box out during contested rebounds and if he follows his own shot more,
-              he will greatly increase his rebounding numbers. To all the GMs, coaches, and players, you have been warned!
+              If Andre Drummond improves his ability to actively box out during contested rebounds and if he follows his own
+              shot consistently, his rebounding numbers will significantly increase. To all the GMs, coaches,
+              and players, you have been warned!
             </strong>
           </p>
           <p>
             <h4><a href="../views/one.html">Action Point 1: Improve His Ability To Actively Box Out</a></h4>
-            Everyone who has ever played basketball has sometimes been guilty of not boxing out. Through this first step, we will identify and quantify
-            specific ways that Andre can improve his ability to increase his contested rebound percentage.
-            Key factors will include looking at his hand/arm placement prior to a rebound,
-            his ability to use his body to box out defenders, and other suggestions. <b><a href="../views/one.html">Learn more here!</a></b>
+            Everyone who has ever played basketball has occasionally been guilty of not boxing out. Through this
+            first action point, we will identify and quantify specific ways that Andre can improve his ability to increase
+            his contested rebound percentage. Key factors will include assessing his hand/arm placement prior to a
+            rebound and his ability to use his body to box out defenders.
+            <b><a href="../views/one.html">Learn more here!</a></b>
           </p>
           <p>
             <h4><a href="../views/two.html">Action Point 2: Follow His Own Field Goal Attempts</a><</h4>
-            Following your own shot is a difficult habit to master. In most cases, you believe that your shot will be successful after you release
-            the shot, so you stay and watch it as opposed to following it. I think that this is more acceptable for perimeter jump shooters because they often
-            have to prepare for transition defense. But in Andre Drummond's case, 94.2%** of his field goals are within 10 feet of the basket. He should
-            be following everything.<b><a href="../views/two.html"> Learn more here!</a></b>
+            Following your own shot is a difficult habit to master. Believing your shot will be successful
+            after it is released, prevents you from consistently following it. I think that this is more
+            acceptable for perimeter jump shooters because they often have to prepare for transition defense.
+            But in Andre Drummond's case, 94.2%** of his field goals are within 10 feet of the basket, he should be following everything.
+            <b><a href="../views/two.html"> Learn more here!</a></b>
           </p>
           <p>
-            **Stats taken as of 12/19
+            **Stats taken as of 12/19/2015
           </p>
       </div>
     </div>
@@ -99,8 +103,8 @@
     <div class="container">
         <h2>Basic Assumptions</h2>
         <ol>
-          <li>Similar refereeing thoughout each contest</li>
-          <li>There are no injuries which a player is playing through</li>
+          <li>Similar refereeing throughout each contest</li>
+          <li>There are no injuries that a player is playing through</li>
           <li>The sample size is an average for the entire season</li>
           <li>Assuming there is no third confounding factor</li>
         </ol>
@@ -110,11 +114,12 @@
         <h2>The Code</h2>
         <p>
           <strong>Description:</strong>
-          This project came to life using mainly Javascript. Currently there is no backend but
-          as I gather more data, I plan on implementing a Node.js RESTful backed. I didn't have a strong
-          background using D3 but I felt it was necessary for this project to convey some key points and I'm very
-          glad I dove in and was able to really play around with it. Below is a brief example calling multiple functions
-          to build the court visualization that are used throughout the web application:
+          This project came to life using primarily JavaScript. Currently there is no backend,
+          but as I gather more data, I plan on implementing a Node.js RESTful backend.
+          I didn't have a strong background using D3 but I felt it was necessary for this project
+          to convey some key points and I'm very glad I dove in and was able to really play around with
+          it. Below is a brief example calling multiple functions to build the court visualization that
+          is used throughout the web application:
         </p>
         <pre id="code">
           var BasketballShotChart = d3.chart('BasketballShotChart', {
@@ -134,10 +139,9 @@
         </pre>
         <p>
           <strong>Conventions:</strong>
-          The goal of this project was to show my passion, comfort, and knowledge of sports
-          from a developer's perspective. I wanted to implement very concise, clean code and
-          in the source files you will see that there are quite a few comments to show parts of
-          my thought process. Example below:
+          The goal of this project was to show my passion, comfort, and knowledge of sports from a developer's perspective.
+          I wanted to implement very concise, clean code and in the source files you will see there are quite a few
+          comments showing my thought process. Example below:
         </p>
           <pre id="code">
             d3.chart.initializeDefaults(BasketballShotChart, {
@@ -151,11 +155,11 @@
               colorLegendTitle: 'Efficiency',
           </pre>
         <p>
-          <strong>Challenges:</strong> Through this mini-project, I sometimes found it challenging to work with the
-          NBA API. There is not a lot of documentation available and this posed challenges when looking for specific endpoints
-          that I could access data from. Ultimately, I want to make this a dynamic web application and I think the best way for me to do that
-          might be through a Nokogiri web scraper as opposed to using the NBA API. This will allow me to pull in more robust information
-          that I was unable to access through the official API.
+          <strong>Challenges:</strong>
+          Through this mini-project, I found it challenging to work with the NBA API because there was a lack of
+          documentation available. This posed challenges when looking for specific endpoints to access data.
+          Looking forward, I envision a dynamic web application and the best way for me to achieve this will be
+          through a Nokogiri web scraper as opposed to using the NBA API. This will allow me to extract more robust information.
         </p>
     </div>
   </body>
