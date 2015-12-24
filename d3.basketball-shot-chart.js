@@ -2,12 +2,10 @@
 (function () {
 
   var clipCounter = 0;
-
   var BasketballShotChart = d3.chart('BasketballShotChart', {
 
     initialize: function () {
       this.calculateVisibleCourtLength();
-
       var base = this.base
         .attr('class', 'shot-chart');
       // draw base court
@@ -19,7 +17,6 @@
       // add data
       this.drawShots();
     },
-
     // helper to create an arc path
     appendArcPath: function (base, radius, startAngle, endAngle) {
       var points = 30;
@@ -200,6 +197,8 @@
         (courtWidth / 2 - threePointSideRadius);
       var sizeXStart = sizeXMid - (sizeLengendWidth / 2);
       var sizeYStart = visibleCourtLength - basketProtrusionLength/3;
+      // Not necessary for Rebounding visualization
+      //
       // var sizeLegend = this.base.append('g')
       //   .classed('legend', true);
       // sizeLegend.append("text")
@@ -321,13 +320,9 @@
           exit: function () {
             this.remove();
           }
-
         },
-
       });
-
     },
-
     // redraw chart
     redraw: function () {
       if (this.data) this.draw(this.data);
@@ -341,7 +336,6 @@
       this._visibleCourtLength = threePointLength +
         (halfCourtLength - threePointLength) / 2;
     },
-
   });
 
   d3.chart.initializeDefaults(BasketballShotChart, {
@@ -396,6 +390,8 @@
     keyWidth: 16,
     // radius of restricted circle (ft)
     restrictedCircleRadius: 4,
+    // Not necessary for rebounding visualziation
+    //
     // title of hexagon size legend
     // sizeLegendTitle: 'Frequency',
     // label of start of hexagon size legend
