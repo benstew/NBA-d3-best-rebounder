@@ -1,4 +1,5 @@
 # The Best Rebounder Visualized
+## Looking at how Andre Drummond can become even better
 
 This visualization aims to become a generic means of generating charts on a basketball court. Currently it only supports hexbin shot charts, with lots of flexibility, but is alpha quality and will be refactored to support other binning mechanisms and other mark types on top of a basketball court.
 
