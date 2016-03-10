@@ -11,6 +11,10 @@ Currently customizable:
 - Integrating different shot chart datasets
 - Titles and labels
 
+## Screenshot
+![Alt text](https://dl.dropboxusercontent.com/s/wwsmz8bpgwx9k2c/NBA_d3_viz.png?dl=0)
+
+
 ## Setup
 
 - Include ```d3.js```
